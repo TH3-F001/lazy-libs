@@ -2,8 +2,8 @@
 
 # --------------- File Checks --------------- # 
 path_exists() {
-    local PATH_ARG=$1
-    if [ -e "$PATH_ARG" ]; then
+    local path_arg=$1
+    if [ -e "$path_arg" ]; then
         return 0
     else
         return 1
@@ -11,8 +11,8 @@ path_exists() {
 }
 
 path_doesnt_exist() {
-    local PATH_ARG=$1
-    if [ ! -e "$PATH_ARG" ]; then
+    local path_arg=$1
+    if [ ! -e "$path_arg" ]; then
         return 0
     else
         return 1
@@ -20,8 +20,8 @@ path_doesnt_exist() {
 }
 
 is_valid_file() {
-    local FILE_PATH=$1
-    if [ -f "$FILE_PATH" ]; then
+    local filepath=$1
+    if [ -f "$filepath" ]; then
         return 0
     else
         return 1
@@ -29,8 +29,8 @@ is_valid_file() {
 }
 
 isnt_valid_file() {
-    local FILE_PATH=$1
-    if [ ! -f "$FILE_PATH" ]; then
+    local filepath=$1
+    if [ ! -f "$filepath" ]; then
         return 0
     else
         return 1
@@ -38,8 +38,8 @@ isnt_valid_file() {
 }
 
 is_valid_directory() {
-    local DIR_PATH=$1
-    if [ -d "$DIR_PATH" ]; then
+    local dir_path=$1
+    if [ -d "$dir_path" ]; then
         return 0
     else
         return 1
@@ -47,8 +47,8 @@ is_valid_directory() {
 }
 
 isnt_valid_directory() {
-    local FILE_PATH=$1
-    if [ ! -d "$FILE_PATH" ]; then
+    local filepath=$1
+    if [ ! -d "$filepath" ]; then
         return 0
     else
         return 1
@@ -56,14 +56,14 @@ isnt_valid_directory() {
 }
 
 file_is_empty() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_is_empty() doesnt exist or isnt a file" >&2
         return 1
     fi
 
-    if [ ! -s "$FILE_PATH" ]; then
+    if [ ! -s "$filepath" ]; then
         return 0
     else
         return 1
@@ -71,14 +71,14 @@ file_is_empty() {
 }
 
 file_isnt_empty() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_isnt_empty() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ -s "$FILE_PATH" ]; then
+    if [ -s "$filepath" ]; then
         return 0
     else
         return 1
@@ -86,14 +86,14 @@ file_isnt_empty() {
 }
 
 file_is_readable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_is_readable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ -r "$FILE_PATH" ]; then
+    if [ -r "$filepath" ]; then
         return 0
     else
         return 1
@@ -102,14 +102,14 @@ file_is_readable() {
 
 
 file_isnt_readable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_isnt_readable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ ! -r "$FILE_PATH" ]; then
+    if [ ! -r "$filepath" ]; then
         return 0
     else
         return 1
@@ -117,14 +117,14 @@ file_isnt_readable() {
 }
 
 file_is_writable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_is_writeable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ -w "$FILE_PATH" ]; then
+    if [ -w "$filepath" ]; then
         return 0
     else
         return 1
@@ -133,14 +133,14 @@ file_is_writable() {
 
 
 file_isnt_writable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_isnt_writable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ ! -w "$FILE_PATH" ]; then
+    if [ ! -w "$filepath" ]; then
         return 0
     else
         return 1
@@ -148,14 +148,14 @@ file_isnt_writable() {
 }
 
 file_is_executable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_is_executable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ -x "$FILE_PATH" ]; then
+    if [ -x "$filepath" ]; then
         return 0
     else
         return 1
@@ -163,14 +163,14 @@ file_is_executable() {
 }
 
 file_isnt_executable() {
-    local FILE_PATH=$1
+    local filepath=$1
 
-    if [ ! -f "$FILE_PATH" ]; then
+    if [ ! -f "$filepath" ]; then
         echo "ERROR: The filepath provided to file_isnt_executable() doesnt exist or isnt a file" >&2
         return 1
     fi
     
-    if [ ! -x "$FILE_PATH" ]; then
+    if [ ! -x "$filepath" ]; then
         return 0
     else
         return 1
@@ -178,15 +178,15 @@ file_isnt_executable() {
 }
 
 file_is_newer_than() {
-    local FILE_A=$1
-    local FILE_B=$2
+    local file_a=$1
+    local file_b=$2
 
-    if [ ! -f "$FILE_A" ] || [ ! -f "$FILE_B" ]; then
+    if [ ! -f "$file_a" ] || [ ! -f "$file_b" ]; then
         echo "ERROR: The filepath provided to file_is_newer_than() doesnt exist or isnt a file" >&2
         return 1
     fi
 
-    if [ "$FILE_A" -nt "$FILE_B" ]; then
+    if [ "$file_a" -nt "$file_b" ]; then
         return 0
     else
         return 1
@@ -194,15 +194,15 @@ file_is_newer_than() {
 }
 
 file_is_older_than() {
-    local FILE_A=$1
-    local FILE_B=$2
+    local file_a=$1
+    local file_b=$2
 
-    if [ ! -f "$FILE_A" ] || [ ! -f "$FILE_B" ]; then
+    if [ ! -f "$file_a" ] || [ ! -f "$file_b" ]; then
         echo "ERROR: The filepath provided to file_is_older_than() doesnt exist or isnt a file" >&2
         return 1
     fi
 
-    if [ "$FILE_A" -ot "$FILE_B" ]; then
+    if [ "$file_a" -ot "$file_b" ]; then
         return 0
     else
         return 1
@@ -212,8 +212,8 @@ file_is_older_than() {
 
 # --------------- String Checks --------------- # 
 string_is_empty() {
-    local STRING=$1
-    if [ -z "$STRING" ]; then
+    local string=$1
+    if [ -z "$string" ]; then
         return 0
     else
         return 1
@@ -221,8 +221,8 @@ string_is_empty() {
 }
 
 string_isnt_empty() {
-    local STRING=$1
-    if [ -n "$STRING" ]; then
+    local string=$1
+    if [ -n "$string" ]; then
         return 0
     else
         return 1
@@ -232,10 +232,10 @@ string_isnt_empty() {
 
 # --------------- Integer Checks --------------- # 
 ints_are_equal() {
-    local INT_A=$1
-    local INT_B=$2
+    local a=$1
+    local b=$2
 
-    if [ "$INT_A" -eq "$INT_B" ]; then
+    if [ "$a" -eq "$b" ]; then
         return 0
     else
         return 1
@@ -243,10 +243,10 @@ ints_are_equal() {
 }
 
 ints_are_not_equal() {
-    local INT_A=$1
-    local INT_B=$2
+    local a=$1
+    local b=$2
 
-    if [ "$INT_A" -ne "$INT_B" ]; then
+    if [ "$a" -ne "$b" ]; then
         return 0
     else
         return 1
@@ -254,9 +254,9 @@ ints_are_not_equal() {
 }
 
 int_is_greater_than() {
-    local INT_A=$1
-    local INT_B=$2
-    if [ "$INT_A" -gt "$INT_B" ]; then
+    local a=$1
+    local b=$2
+    if [ "$a" -gt "$b" ]; then
         return 0
     else
         return 1
@@ -264,10 +264,10 @@ int_is_greater_than() {
 }
 
 int_is_less_than() {
-    local INT_A=$1
-    local INT_B=$2
+    local a=$1
+    local b=$2
 
-    if [ "$INT_A" -lt "$INT_B" ]; then
+    if [ "$a" -lt "$b" ]; then
         return 0
     else
         return 1
@@ -275,10 +275,10 @@ int_is_less_than() {
 }
 
 int_is_greater_than_or_equal() {
-    local INT_A=$1
-    local INT_B=$2
+    local a=$1
+    local b=$2
 
-    if [ "$INT_A" -ge "$INT_B" ]; then
+    if [ "$a" -ge "$b" ]; then
         return 0
     else
         return 1
@@ -286,10 +286,10 @@ int_is_greater_than_or_equal() {
 }
 
 int_is_less_than_or_equal() {
-    local INT_A=$1
-    local INT_B=$2
+    local a=$1
+    local b=$2
 
-    if [ "$INT_A" -le "$INT_B" ]; then
+    if [ "$a" -le "$b" ]; then
         return 0
     else
         return 1
