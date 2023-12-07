@@ -1,0 +1,19 @@
+#!/bin/bash
+
+path_exists() {
+     PATH_ARG=$1
+    if [ -e "$PATH_ARG" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+path_doesnt_exist() {
+    PATH_ARG=$1
+    if [ ! -e "$PATH_ARG" ]; then
+        return 0
+    else
+        return 1
+    fi
+}

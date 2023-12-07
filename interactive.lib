@@ -1,0 +1,35 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+LIB_SCRIPT_DIR="$SCRIPT_DIR/libraries"
+
+source "$LIB_SCRIPT_DIR/basic-operations.lib"
+
+request_filepath() {
+    MSG=$1
+    if 
+}
+
+request_authorized_keys() {
+    echo -e "Would you like to provide any authorized ssh keys?\n\
+    [0]\tNo\n\
+    [1]\tYes - External File\n\
+    [2]\tYes - Make one\n\
+    [3]\tYes - I'll Copy/Paste"
+
+    local ANSWER
+
+    while true; do
+        read -p "> " ANSWER
+
+        case $ANSWER in
+            0)
+                echo "Skipping Authorized Keys..."
+                break
+                ;;
+            1)
+                echo "Please"
+    done
+
+    
+}
