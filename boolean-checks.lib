@@ -210,8 +210,8 @@ file_is_older_than() {
 }
 
 
-# --------------- String Checks --------------- # 
-string_is_empty() {
+# --------------- Var Checks --------------- # 
+var_is_null_or_empty() {
     local string=$1
     if [ -z "$string" ]; then
         return 0
@@ -220,7 +220,7 @@ string_is_empty() {
     fi
 }
 
-string_isnt_empty() {
+var_has_value() {
     local string=$1
     if [ -n "$string" ]; then
         return 0
@@ -294,4 +294,10 @@ int_is_less_than_or_equal() {
     else
         return 1
     fi
+}
+
+# --------------- System Checks --------------- # 
+
+package_is_installed() {
+    dpkg -l "$1" &> /dev/null
 }
