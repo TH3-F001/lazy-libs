@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 
 # --------------- File Checks --------------- # 
 path_exists() {
@@ -298,6 +298,6 @@ int_is_less_than_or_equal() {
 
 # --------------- System Checks --------------- # 
 
-package_is_installed() {
+apt_package_is_installed() {
     dpkg -l "$1" &> /dev/null
 }
