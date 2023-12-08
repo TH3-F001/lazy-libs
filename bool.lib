@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 # --------------- File Checks --------------- # 
 path_exists() {
@@ -296,8 +296,34 @@ int_is_less_than_or_equal() {
     fi
 }
 
-# --------------- System Checks --------------- # 
 
+# --------------- File Checkss --------------- # 
+is_in_path() {
+    local DIR_PATH=$1
+    if ! check_argument "$DIR_PATH"; then
+        print_error "is_in_path expects a directory path as an argument"
+        return 1
+    fi
+
+    if [[ ":$PATH:" != *":$DIR_PATH:"* ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+
+# --------------- System Checks --------------- # 
 apt_package_is_installed() {
     dpkg -l "$1" &> /dev/null
+}
+
+command_exists() {
+    local CMD=$1
+
+    if command -v "$CMD" &> /dev/null; then
+        return 0
+    else
+        return 1
+    fi
 }

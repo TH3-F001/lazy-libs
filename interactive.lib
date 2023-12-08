@@ -9,7 +9,8 @@ request_filepath() {
     fi
 
     while true; do
-        read -p "$msg" filepath
+        echo -e "$msg"
+        read -p "> " filepath
         if [ ! -f "$filepath" ]; then
             echo "ERROR: the path you provided is not a valid file."
         else
@@ -27,14 +28,25 @@ request_string() {
         msg="Please provide some input: "
     fi
 
-    read -p "$msg" string
+    echo -e "$msg"
+    read -p "> " string
 
     echo "$string"
-
 }
 
+# You can use comma_list_to_array() from convert.lib to create an array from this output
+request_usernames() {
+    local msg=$1
+    local usernames=""
+    
+    if [ -z "$msg" ]; then
+        msg="Please Provide a one or more usernames (separated by commas): "
+    fi
 
-request_authorized_keys() {
+   echo "$(request_string $msg )"
+}
+
+request_authorized_key() {
     local key_name=$1
     local answer=""
     local keys=""
@@ -43,7 +55,7 @@ request_authorized_keys() {
         key_name=id_rsa
     fi
 
-    echo -e "Would you like to provide any authorized ssh keys?\n\
+    echo -e "Would you like to provide an authorized ssh key?\n\
     [0]\tNo\n\
     [1]\tYes - External File\n\
     [2]\tYes - Make one\n\
@@ -54,7 +66,7 @@ request_authorized_keys() {
 
         case $answer in
             0)
-                echo "Skipping Authorized Keys..."
+                echo "Skipping Authorized Key..."
                 return
                 ;;
             1)
@@ -76,8 +88,7 @@ request_authorized_keys() {
                     fi
                 else
                     echo "ERROR: Problem occurred while creating SSH key"
-                fi
-                
+                fi               
                 break
                 ;;
             3)
