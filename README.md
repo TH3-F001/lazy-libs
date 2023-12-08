@@ -1,4 +1,4 @@
-# Lazy-Libs
+# N00b-Bash
 
 ## Description
 a collection of bash libraries to make bash scripting a little easier and more intuitive for people coming from a more pythonic background.
