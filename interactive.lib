@@ -90,7 +90,8 @@ request_authorized_key() {
                         keys=""
                     fi
                 else
-                    echo "ERROR: Problem occurred while creating SSH key"
+                    echo "ERROR: Problem occurred while creating SSH key" >&2
+                    keys=""
                 fi               
                 break
                 ;;
