@@ -79,7 +79,7 @@ request_authorized_key() {
                 ;;
             2)
                 ssh-keygen -t rsa -b 4096 -N "" -f "$HOME/.ssh/$key_name"
-                if $?; then
+                if [ $? -eq 0 ]; then
                     local ssh_dir="$HOME/.ssh"
                     local latest_pub_file=$(ls -t "$ssh_dir"/*.pub 2> /dev/null | head -n 1)
                     
