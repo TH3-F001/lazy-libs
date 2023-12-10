@@ -25,11 +25,10 @@ request_string() {
     local string=""
 
     if [ -z "$msg" ]; then
-        msg="Please provide some input: "
+        msg="Please provide some input"
     fi
 
-    echo -e "$msg"
-    read -p "> " string
+    read -p "$msg: " string
 
     echo "$string"
 }
@@ -66,8 +65,7 @@ request_authorized_key() {
 
         case $answer in
             0)
-                echo "Skipping Authorized Key..."
-                return
+                keys=""
                 ;;
             1)
                 local filepath=$(request_filepath "Please provide the path to your authorized key")
@@ -83,7 +81,6 @@ request_authorized_key() {
                     if [ -n "$latest_pub_file" ]; then
                         keys=$(cat "$latest_pub_file")
                     else
-                        echo "No .pub file found in $ssh_dir"
                         keys=""
                     fi
                 else
