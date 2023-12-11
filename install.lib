@@ -1,8 +1,6 @@
 #!/bin/bash
 lib_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-source "$lib_script_dir/basic-operations.lib"
-
 # ----------- Package Maps ----------- #
 
 declare -A apt_packages=(
